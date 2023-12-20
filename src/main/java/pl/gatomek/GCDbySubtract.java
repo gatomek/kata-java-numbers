@@ -1,9 +1,12 @@
 package pl.gatomek;
 
-import java.security.NoSuchAlgorithmException;
+public class GCDbySubtract {
 
-public class GCD {
-    public static long bySubstracting( long a, long b) {
+    private GCDbySubtract() {
+
+    }
+
+    public static long calc(long a, long b) {
         if( a <= 0 || b <= 0)
             throw new ArithmeticException();
 
@@ -17,12 +20,8 @@ public class GCD {
             if (min == max)
                 return min;
 
-            t1 = Math.min(min, max);
+            t1 = min;
             t2 = max - min;
         }
-    }
-
-    public static long byModulo( long a, long b) throws NoSuchAlgorithmException {
-        throw new NoSuchAlgorithmException();
     }
 }
