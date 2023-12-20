@@ -1,6 +1,8 @@
 package pl.gatomek;
 
+import java.util.HashSet;
 import java.util.Random;
+import java.util.Set;
 
 public class FermatsLittleTheorem {
     public static void main(String[] args) throws Exception {
@@ -11,27 +13,22 @@ public class FermatsLittleTheorem {
         }
     }
 
-    public static boolean isPrime( Long p, int nProbes) throws Exception {
+    public static boolean isPrime( Long p, int nProbes) throws ArithmeticException {
         if( nProbes < 0)
-            throw new Exception();
+            throw new ArithmeticException();
 
         Random random = new Random();
         int counter = 0;
 
         while( true) {
-            final long a = random.nextLong( p * 10) + 1;
+            final long a = random.nextLong(100_000_000) + 1;
 
-            final long nwd = GCD.bySubstracting(a, p);
+            final long nwd = GCDbySubtract.calc(a, p);
             if (nwd != 1) {
                 continue;
             }
 
-            long result = a;
-            for (int i = 1; i < p; i++)
-                result *= a;
-            result -= a;
-
-            final long rest = result % p;
+            final long rest = PowerModulo.calc( a, p-1, p) - 1;
             if( rest != 0)
                 return false;
 
